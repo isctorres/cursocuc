@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Teko&display=swap');
+
+.columna{
+    background-color: #CCC;
+    color: #000;
+    padding: 10px;
+}
+
+.columna img{
+    width: 100%;
+}
+
+.spacing{
+    margin: 20px;
+}
+
+h3{
+    font-family: 'Tangerine', cursive;
+    font-size: 50px;
+}
+
+.info_curso{
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    color: #FFF;
+    padding-left: 10px;
+    padding-right: 10px;
+}
