@@ -29,7 +29,7 @@
 
     <main>
         <div class="container">
-            <form action="../controlador/clientesController.php" method="post">
+            <form action="../controlador/clientesController.php?opc=1" method="post">
                 <div class="form-group">
                     <label for="txtNombre">Nombre Completo</label>
                     <input id="txtNombre" name="txtNombre" class="form-control" type="text">
@@ -49,6 +49,38 @@
                 <button type="submit" class="btn btn-primary">Enviar Comentarios</button>
                 <button type="button" class="btn btn-danger">Regresar</button>
             </form>
+
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Comentario</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require_once("../modelos/Conexion.php");
+                        require_once("../modelos/clientesModel.php");
+                        $clientes = new ClientesModel();
+                        $getComments = $clientes->SELECT();
+                        if($getComments){
+                            while ( $fila = $getComments->fetch_assoc() ) {
+                                echo "<tr>";
+                                    echo "<th scope='row'>1</th>";
+                                    echo "<td>".$fila["nombre"].'</td>';
+                                    echo "<td>".$fila["email"].'</td>';
+                                    echo "<td>".$fila["telefono"].'</td>';
+                                    echo "<td>".$fila["comentario"].'</td>';
+                                echo "</tr>";
+                            }
+                        }
+                    ?>
+                </tbody>
+              </table>
+
         </div>
     </main>
 
