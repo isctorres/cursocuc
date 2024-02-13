@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="../assets/css/contactus.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -58,6 +59,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Comentario</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,6 +76,10 @@
                                     echo "<td>".$fila["email"].'</td>';
                                     echo "<td>".$fila["telefono"].'</td>';
                                     echo "<td>".$fila["comentario"].'</td>';
+                                    echo "<td>
+                                        <button type='button' class='btn btn-success' onClick='actualizar(\"".$fila['nombre']."\")' >Actualizar</button>
+                                        <button type='button' class='btn btn-danger' onClick='eliminar()'>Eliminar</button>
+                                    </td>";
                                 echo "</tr>";
                             }
                         }
@@ -282,3 +288,13 @@
     </footer>
 </body>
 </html>
+<script>
+    //document.getElementById("txtNombre").value = "Hola Chavos";
+    function actualizar(nombre){
+        alert(nombre);
+    }
+
+    function eliminar(){
+
+    }
+</script>
