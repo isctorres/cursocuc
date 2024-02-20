@@ -77,7 +77,7 @@
                                     echo "<td>".$fila["telefono"].'</td>';
                                     echo "<td>".$fila["comentario"].'</td>';
                                     echo "<td>
-                                        <button type='button' class='btn btn-success' onClick='actualizar(\"".$fila['nombre']."\")' >Actualizar</button>
+                                        <button type='button' class='btn btn-success' onClick='actualizar(\"".$fila['nombre']."\",\"".$fila['email']."\",\"".$fila['telefono']."\",\"".$fila['comentario']."\")' >Actualizar</button>
                                         <button type='button' class='btn btn-danger' onClick='eliminar()'>Eliminar</button>
                                     </td>";
                                 echo "</tr>";
