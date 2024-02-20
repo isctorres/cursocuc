@@ -290,8 +290,8 @@
 </html>
 <script>
     //document.getElementById("txtNombre").value = "Hola Chavos";
-    function actualizar(nombre){
-        alert(nombre);
+    function actualizar( idcomentario, nombre, email, telefono, comentario){
+            
     }
 
     function eliminar(){
