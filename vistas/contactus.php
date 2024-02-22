@@ -29,8 +29,10 @@
     </nav>
 
     <main>
+        <div id="alert" class="alert alert-default" role="alert">
+        </div>
         <div class="container">
-            <form action="../controlador/clientesController.php?opc=1" method="post">
+            <form id="frmContacto">
                 <div class="form-group">
                     <label for="txtNombre">Nombre Completo</label>
                     <input id="txtNombre" name="txtNombre" class="form-control" type="text">
@@ -47,7 +49,8 @@
                     <label for="txtComentarios">Comentarios</label>
                     <textarea name="txtComentarios" id="txtComentarios" cols="30" rows="10" class="form-control"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar Comentarios</button>
+                <button type="button" id="btnInsertar" class="btn btn-primary">Enviar Comentarios</button>
+                <button type="button" id="btnActualizar" class="btn btn-success">Actualizar Comentarios</button>
                 <button type="button" class="btn btn-danger">Regresar</button>
             </form>
 
@@ -77,7 +80,7 @@
                                     echo "<td>".$fila["telefono"].'</td>';
                                     echo "<td>".$fila["comentario"].'</td>';
                                     echo "<td>
-                                        <button type='button' class='btn btn-success' onClick='actualizar(\"".$fila['nombre']."\",\"".$fila['email']."\",\"".$fila['telefono']."\",\"".$fila['comentario']."\")' >Actualizar</button>
+                                        <button type='button' class='btn btn-success' onClick='actualizar(".$fila['idComentario'].",\"".$fila['nombre']."\",\"".$fila['email']."\",\"".$fila['telefono']."\",\"".$fila['comentario']."\")' >Actualizar</button>
                                         <button type='button' class='btn btn-danger' onClick='eliminar()'>Eliminar</button>
                                     </td>";
                                 echo "</tr>";
@@ -289,12 +292,50 @@
 </body>
 </html>
 <script>
-    //document.getElementById("txtNombre").value = "Hola Chavos";
     function actualizar( idcomentario, nombre, email, telefono, comentario){
-            
+        //JS
+        /*document.getElementById("txtNombre").value = nombre;
+        document.getElementById("txtEmail").value = email;
+        document.getElementById("txtTelefono").value = telefono;
+        document.getElementById("txtComentarios").value = comentario;*/
+
+        //JQuery
+        $('#txtNombre').prop("value",nombre);
+        $('#txtEmail').prop("value",email);
+        $('#txtTelefono').prop("value",telefono);
+        $('#txtComentarios').prop("value",comentario);
+
     }
 
     function eliminar(){
 
     }
+
+
+
+    $(document).ready(function(){
+        $('#btnActualizar').hide();
+        $('#alert').hide();
+
+        $('#btnInsertar').click(
+            function(){
+                var formData = $('#frmContacto').serialize();
+                $.ajax({
+                    type: "POST",
+                    data: formData,
+                    url: "../controlador/clientesController.php?opc=1",
+                    success: function(data){
+                        $('#alert').show();
+                        $('#alert').text(data);
+                        if( data == "Registro Insertado" ){
+                            $('#alert').addClass("alert-success"); 
+                        }else{
+                            $('#alert').addClass("alert-danger"); 
+                        }
+                    }
+                });
+            }
+        );
+
+    });
 </script>
