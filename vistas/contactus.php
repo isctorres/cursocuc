@@ -33,6 +33,7 @@
         </div>
         <div class="container">
             <form id="frmContacto">
+                <input type="text" name="hddIdComentario" id="hddIdComentario"/>
                 <div class="form-group">
                     <label for="txtNombre">Nombre Completo</label>
                     <input id="txtNombre" name="txtNombre" class="form-control" type="text">
@@ -300,11 +301,13 @@
         document.getElementById("txtComentarios").value = comentario;*/
 
         //JQuery
+        $('#btnActualizar').show();
+        $('#btnInsertar').hide();
+        $('#hddIdComentario').prop("value",idcomentario);
         $('#txtNombre').prop("value",nombre);
         $('#txtEmail').prop("value",email);
         $('#txtTelefono').prop("value",telefono);
         $('#txtComentarios').prop("value",comentario);
-
     }
 
     function eliminar(){
@@ -337,5 +340,25 @@
             }
         );
 
+
+        $('#btnActualizar').click(
+            function(){
+                var formData = $('#frmContacto').serialize();
+                $.ajax({
+                    type: "POST",
+                    data: formData,
+                    url: "../controlador/clientesController.php?opc=2",
+                    success: function(data){
+                        $('#alert').show();
+                        $('#alert').text(data);
+                        if( data == "Registro Actualizado" ){
+                            $('#alert').addClass("alert-success"); 
+                        }else{
+                            $('#alert').addClass("alert-danger"); 
+                        }
+                    }
+                });
+            }
+        );
     });
 </script>

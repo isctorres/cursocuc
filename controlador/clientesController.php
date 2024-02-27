@@ -15,13 +15,14 @@
             echo $res;
             break;
         case 2: // Actualizar comentario
+            $idComentario = $_POST['hddIdComentario'];
             $nombre = $_POST['txtNombre'];
             $email  = $_POST['txtEmail'];
             $tel    = $_POST['txtTelefono'];
             $coment = $_POST['txtComentarios'];
 
             $clientes = new ClientesModel();
-            $res = $clientes->UPDATE($nombre,$email,$tel,$coment);
+            $res = $clientes->UPDATE($idComentario,$nombre,$email,$tel,$coment);
             echo $res;
         case 4: // Consultar los datos de la tabla
             $clientes = new ClientesModel();

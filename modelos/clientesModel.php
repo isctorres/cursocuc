@@ -18,16 +18,17 @@
 
         function UPDATE($idComentario, $nombre, $email, $telefono, $comentario){
             $conexion = new Conexion();
+            $mysqli = $conexion->crearConexion();
             $sql = "UPDATE tblComentario SET nombre = '".$nombre."', email = '".$email."',
             telefono = '".$telefono."', comentario = '".$comentario."' 
             WHERE idComentario = ".$idComentario;
-            if( $conexion->query($sql) == TRUE ){
+            if( $mysqli->query($sql) == TRUE ){
                 return "Se actualizó correctamente el registro";
             }
             else{
                 return "Ocurrió un error al actualizar";
             }
-            $conexion->close();
+            $mysqli->close();
         }
 
         function DELETE($idComentario){
