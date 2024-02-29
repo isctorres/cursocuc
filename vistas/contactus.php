@@ -33,7 +33,7 @@
         </div>
         <div class="container">
             <form id="frmContacto">
-                <input type="text" name="hddIdComentario" id="hddIdComentario"/>
+                <input type="hidden" name="hddIdComentario" id="hddIdComentario"/>
                 <div class="form-group">
                     <label for="txtNombre">Nombre Completo</label>
                     <input id="txtNombre" name="txtNombre" class="form-control" type="text">
@@ -82,7 +82,7 @@
                                     echo "<td>".$fila["comentario"].'</td>';
                                     echo "<td>
                                         <button type='button' class='btn btn-success' onClick='actualizar(".$fila['idComentario'].",\"".$fila['nombre']."\",\"".$fila['email']."\",\"".$fila['telefono']."\",\"".$fila['comentario']."\")' >Actualizar</button>
-                                        <button type='button' class='btn btn-danger' onClick='eliminar()'>Eliminar</button>
+                                        <button type='button' class='btn btn-danger' onClick='eliminar(".$fila['idComentario'].")'>Eliminar</button>
                                     </td>";
                                 echo "</tr>";
                             }
@@ -310,8 +310,24 @@
         $('#txtComentarios').prop("value",comentario);
     }
 
-    function eliminar(){
+    function eliminar(idComentario){
 
+        if(confirm("Deseas eliminar el comentario seleccionado?")){
+            $.ajax({
+                type:"POST",
+                data: { "idComentario" : idComentario},
+                url: "../controlador/clientesController.php?opc=3",
+                success: function(data){
+                    $('#alert').show();
+                    $('#alert').text(data);
+                    if( data == "Borrado Exitoso" ){
+                        $('#alert').addClass("alert-success"); 
+                    }else{
+                        $('#alert').addClass("alert-danger"); 
+                    }
+                }
+            });
+        }
     }
 
 
